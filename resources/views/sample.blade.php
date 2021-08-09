@@ -19,7 +19,7 @@
             </tbody>
         </table>
     </div>
-    {{ $users->links() }}
+    {{ $users->links('pagination') }}
     @lang('passwords.reset')
 </div>
 <script src="{{ mix('/js/app.js') }}" defer></script>
