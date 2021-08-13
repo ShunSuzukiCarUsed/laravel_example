@@ -41,13 +41,5 @@
                 </li>
             @endif
         </ul>
-
-        @if (count($items) > 0)
-            <p>{{ ($items->currentPage() - 1) * $items->perPage() + 1 }} ~
-                {{ (($items->currentPage() - 1) * $items->perPage() + 1) + (count($items) - 1) }}
-                {{ $items->total() }}件中</p>
-        @else
-            <p>データがありません。</p>
-        @endif
     </nav>
 @endif
