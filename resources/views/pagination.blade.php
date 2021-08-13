@@ -7,13 +7,13 @@
                 </li>
             @endif
 
-            @if ($paginator->currentPage() - 3 > 1)
+            @if ($paginator->currentPage() - 5 > 1)
                 <li>
                     <a href="{{ $paginator->url(1) }}">1</a>
                 </li>
             @endif
 
-            @if ($paginator->currentPage() - 4 > 1)
+            @if ($paginator->currentPage() - 6 > 1)
                 <li class="disabled" aria-disabled="true"><span>...</span></li>
             @endif
 
@@ -25,11 +25,11 @@
                 @endif
             @endfor
 
-            @if ($paginator->currentPage() + 4 < $paginator->lastPage())
+            @if ($paginator->currentPage() + 6 < $paginator->lastPage())
                 <li class="disabled" aria-disabled="true"><span>...</span></li>
             @endif
 
-            @if ($paginator->currentPage() + 3 < $paginator->lastPage())
+            @if ($paginator->currentPage() + 5 < $paginator->lastPage())
                 <li>
                     <a href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a>
                 </li>
@@ -41,5 +41,21 @@
                 </li>
             @endif
         </ul>
+
+        @foreach ($elements as $element)
+            @if (is_string($element))
+                <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
+            @endif
+
+            @if (is_array($element))
+                @foreach ($element as $page => $url)
+                    @if ($page == $paginator->currentPage())
+                        <li class="active" aria-current="page"><span>&nbsp;{{ $page }}</span></li>
+                        &nbsp;/&nbsp;
+                        <li class="active" aria-current="page"><span>{{ $paginator->lastPage() }}&nbsp;</span></li>
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
     </nav>
 @endif
