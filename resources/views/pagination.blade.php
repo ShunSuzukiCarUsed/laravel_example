@@ -17,7 +17,7 @@
                 <li class="disabled" aria-disabled="true"><span>...</span></li>
             @endif
 
-            @for ($page = max(1, $paginator->currentPage() - 3); $page <= min($paginator->currentPage() + 3, $paginator->lastPage()); $page++)
+            @for ($page = max(1, $paginator->currentPage() - 5); $page <= min($paginator->currentPage() + 5, $paginator->lastPage()); $page++)
                 @if ($page == $paginator->currentPage())
                     <li class="active" aria-current="page"><span>{{ $page }}</span></li>
                 @else
@@ -42,20 +42,12 @@
             @endif
         </ul>
 
-        @foreach ($elements as $element)
-            @if (is_string($element))
-                <li class="disabled" aria-disabled="true"><span>{{ $element }}</span></li>
-            @endif
-
-            @if (is_array($element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <li class="active" aria-current="page"><span>&nbsp;{{ $page }}</span></li>
-                        &nbsp;/&nbsp;
-                        <li class="active" aria-current="page"><span>{{ $paginator->lastPage() }}&nbsp;</span></li>
-                    @endif
-                @endforeach
-            @endif
-        @endforeach
+        @if (count($items) > 0)
+            <p>{{ ($items->currentPage() - 1) * $items->perPage() + 1 }} ~
+                {{ (($items->currentPage() - 1) * $items->perPage() + 1) + (count($items) - 1) }}
+                {{ $items->total() }}件中</p>
+        @else
+            <p>データがありません。</p>
+        @endif
     </nav>
 @endif
