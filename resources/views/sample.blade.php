@@ -7,26 +7,27 @@
             <p>{{ ($users->currentPage() - 1) * $users->perPage() + 1 }} ~
                 {{ (($users->currentPage() - 1) * $users->perPage() + 1) + (count($users) - 1) }}
                 {{ $users->total() }}件中</p>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Create Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->crttime }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
         @else
             <p>データがありません。</p>
         @endif
-
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Create Time</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->crttime }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
     </div>
     {{ $users->links('pagination') }}
     @lang('passwords.reset')
